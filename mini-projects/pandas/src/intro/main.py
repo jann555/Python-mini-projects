@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv('../resources/weather_data.csv')
+data = pd.read_csv('../../resources/weather_data.csv')
 # temperatures = [int(datum[1]) for datum in data if datum[1] != 'temp']
 # Get data in columns
 data_dict = data.to_dict()
