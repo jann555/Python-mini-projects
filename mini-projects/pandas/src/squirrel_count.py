@@ -1,6 +1,7 @@
 import pandas as pd
 
-squirrel_data = pd.read_csv('../resources/2018_Central_Park_Squirrel_Census_-_Squirrel_Data_20240213.csv')
+squirrel_data = pd.read_csv(
+    '../resources/2018_Central_Park_Squirrel_Census_-_Squirrel_Data_20240213.csv')
 
 gray_sq = len(squirrel_data[squirrel_data["Primary Fur Color"] == "Gray"])
 cnnmn_sq = len(squirrel_data[squirrel_data["Primary Fur Color"] == "Cinnamon"])
