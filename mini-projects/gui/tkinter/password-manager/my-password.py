@@ -4,10 +4,13 @@ https://replit.com/@appbrewery/grid-columnspan-demo#main.py
 https://tkdocs.com/tutorial/canvas.html
 """
 from tkinter import Tk, Button, Label, Canvas, PhotoImage, Entry, END, messagebox
+import password_generator as password_manager
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
+    password = password_manager.random_password()
+    password_entry.insert(0, password)
     pass
 
 
