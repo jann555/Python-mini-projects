@@ -3,7 +3,7 @@ https://tkdocs.com/tutorial/widgets.html#entry
 https://replit.com/@appbrewery/grid-columnspan-demo#main.py
 https://tkdocs.com/tutorial/canvas.html
 """
-from tkinter import Tk, Button, Label, Canvas, PhotoImage, Entry
+from tkinter import Tk, Button, Label, Canvas, PhotoImage, Entry, END, messagebox
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -12,7 +12,18 @@ def generate_password():
 
 
 def add_password():
-    pass
+    website = website_entry.get()
+    email = email_username_entry.get()
+    password = password_entry.get()
+    is_ok_to_save = messagebox.askokcancel(title=website, message=f"Details Entered: \nEmail: {email} "
+                                                                  f"\nPassword: {password} \nIs it ok to save?")
+    if is_ok_to_save:
+        with open("saved_passwords.txt", "a") as file:
+            entry = f' {website} | {email} | {password} \n'
+            file.write(entry)
+        website_entry.delete(0, END)
+        password_entry.delete(0, END)
+        messagebox.showinfo("Success", "Password Saved Successfully")
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -29,8 +40,10 @@ canvas.create_image(100, 100, image=logo_img)
 # Labels and Entries
 website_label = Label(text="Website:", font=("Arial", 10, "normal"))
 website_entry = Entry(width=50)
+website_entry.focus()
 email_username_label = Label(text="Email/Username:", font=("Arial", 10, "normal"))
 email_username_entry = Entry(width=50)
+email_username_entry.insert(0, "dummyemail@gmail.com")
 password_label = Label(text="Password:", font=("Arial", 10, "normal"))
 password_entry = Entry(width=30)
 
