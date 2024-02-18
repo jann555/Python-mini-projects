@@ -3,6 +3,7 @@ https://tkdocs.com/tutorial/widgets.html#entry
 https://replit.com/@appbrewery/grid-columnspan-demo#main.py
 https://tkdocs.com/tutorial/canvas.html
 """
+import json
 from tkinter import Tk, Button, Label, Canvas, PhotoImage, Entry, END, messagebox
 import pyperclip
 import password_generator as password_manager
@@ -20,16 +21,33 @@ def add_password():
     website = website_entry.get()
     email = email_username_entry.get()
     password = password_entry.get()
+    new_data = {
+        website: {
+            "email": email,
+            "password": password,
+        }
+    }
 
     if len(website) == 0 or len(password) == 0:
         messagebox.showerror("ERROR", "Required fields empty!")
     else:
-        is_ok_to_save = messagebox.askokcancel(title=website, message=f"Details Entered: \nEmail: {email} "
-                                                                      f"\nPassword: {password} \nIs it ok to save?")
-        if is_ok_to_save:
-            with open("saved_passwords.txt", "a") as file:
-                entry = f' {website} | {email} | {password} \n'
-                file.write(entry)
+        try:
+            with open("saved_passwords.json", "r") as file:
+                # Reading old Data
+                data = json.load(file)
+
+        except FileNotFoundError:
+            with open("saved_passwords.json", "w") as file:
+                json.dump(new_data, file, indent=4)
+        else:
+            # Updating old data with new data
+            data.update(new_data)
+
+            with open("saved_passwords.json", "w") as file:
+                # Saving updated data
+                json.dump(data, file, indent=4)
+
+        finally:
             website_entry.delete(0, END)
             password_entry.delete(0, END)
             messagebox.showinfo("Success", "Password Saved Successfully")
