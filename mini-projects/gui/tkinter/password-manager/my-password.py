@@ -15,15 +15,19 @@ def add_password():
     website = website_entry.get()
     email = email_username_entry.get()
     password = password_entry.get()
-    is_ok_to_save = messagebox.askokcancel(title=website, message=f"Details Entered: \nEmail: {email} "
-                                                                  f"\nPassword: {password} \nIs it ok to save?")
-    if is_ok_to_save:
-        with open("saved_passwords.txt", "a") as file:
-            entry = f' {website} | {email} | {password} \n'
-            file.write(entry)
-        website_entry.delete(0, END)
-        password_entry.delete(0, END)
-        messagebox.showinfo("Success", "Password Saved Successfully")
+
+    if len(website) == 0 or len(password) == 0:
+        messagebox.showerror("ERROR", "Required fields empty!")
+    else:
+        is_ok_to_save = messagebox.askokcancel(title=website, message=f"Details Entered: \nEmail: {email} "
+                                                                      f"\nPassword: {password} \nIs it ok to save?")
+        if is_ok_to_save:
+            with open("saved_passwords.txt", "a") as file:
+                entry = f' {website} | {email} | {password} \n'
+                file.write(entry)
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
+            messagebox.showinfo("Success", "Password Saved Successfully")
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
