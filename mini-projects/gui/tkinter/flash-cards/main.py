@@ -6,14 +6,13 @@ import pandas as pd
 BACKGROUND_COLOR = "#B1DDC6"
 current_card = {}
 
-
-def initialize_cards():
+try:
     # LOAD DATA
+    data_frame = pd.read_csv('./data/word_to_learn.csv')
+    french_english_dict = data_frame.to_dict(orient="records")
+except FileNotFoundError:
     data_frame = pd.read_csv('./data/french_words.csv')
-    return data_frame.to_dict(orient="records")
-
-
-french_english_dict = initialize_cards()
+    french_english_dict = data_frame.to_dict(orient="records")
 
 
 # Buttons commands
@@ -32,6 +31,13 @@ def flip_card():
     canvas.itemconfig(card_word, text=f'{current_card['English']}', fill='white')
     canvas.itemconfig(flash_card, image=card_back)
     canvas.update()
+
+
+def is_known():
+    french_english_dict.remove(current_card)
+    data = pd.DataFrame(french_english_dict)
+    data.to_csv("./data/word_to_learn.csv")
+    next_card()
 
 
 window = Tk()
@@ -54,7 +60,7 @@ canvas.grid(row=0, column=0, columnspan=2)
 # Buttons
 wrong_button = Button(image=wrong, highlightthickness=0, command=next_card)
 wrong_button.grid(row=1, column=0)
-right_button = Button(image=right, highlightthickness=0, command=next_card)
+right_button = Button(image=right, highlightthickness=0, command=is_known)
 right_button.grid(row=1, column=1)
 
 next_card()
