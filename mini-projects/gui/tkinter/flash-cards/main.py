@@ -5,21 +5,23 @@ import pandas as pd
 
 BACKGROUND_COLOR = "#B1DDC6"
 current_card = {}
+learn_dictionary = {}
 
 try:
     # LOAD DATA
     data_frame = pd.read_csv('./data/word_to_learn.csv')
-    french_english_dict = data_frame.to_dict(orient="records")
 except FileNotFoundError:
     data_frame = pd.read_csv('./data/french_words.csv')
-    french_english_dict = data_frame.to_dict(orient="records")
+    learn_dictionary = data_frame.to_dict(orient="records")
+else:
+    learn_dictionary = data_frame.to_dict(orient="records")
 
 
 # Buttons commands
 def next_card():
     global current_card, flip_timer
     window.after_cancel(flip_timer)
-    current_card = random.choice(french_english_dict)
+    current_card = random.choice(learn_dictionary)
     canvas.itemconfig(tittle_text, text=f'French', fill='black')
     canvas.itemconfig(card_word, text=f'{current_card['French']}', fill='black')
     canvas.itemconfig(flash_card, image=card_front)
@@ -34,9 +36,9 @@ def flip_card():
 
 
 def is_known():
-    french_english_dict.remove(current_card)
-    data = pd.DataFrame(french_english_dict)
-    data.to_csv("./data/word_to_learn.csv")
+    learn_dictionary.remove(current_card)
+    data = pd.DataFrame(learn_dictionary)
+    data.to_csv("./data/word_to_learn.csv", index=False)
     next_card()
 
 
