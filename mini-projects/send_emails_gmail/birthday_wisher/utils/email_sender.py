@@ -1,6 +1,6 @@
 import smtplib
 
-DEFAULT_EMAIL = "fredalocampo@gmail.com"
+DEFAULT_EMAIL = "sample+email@gmail.com"
 
 
 def send_email(destination, msg, email_addr=DEFAULT_EMAIL, subject="Daily Quote"):

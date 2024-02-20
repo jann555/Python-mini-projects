@@ -7,8 +7,8 @@ QUOTES_FILE = '../resources/quotes.txt'
 TUESDAY = 1
 quotes_file = CustomFileReader(QUOTES_FILE)
 
-email_address = "fredalocampo@gmail.com"
-destination_email = "fredalocampo+smtplib@gmail.com"
+email_address = "sample+email@gmail.com"
+destination_email = "sample+email+smtplib@gmail.com"
 
 day_of_week = datetime.now().weekday()
 

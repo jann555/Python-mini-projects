@@ -22,5 +22,5 @@ if today in birthday_dict:
     )
 
     print(formatted_letter)
-    send_email(destination="fredalocampo+happy@gmail.com", msg=formatted_letter, subject="Happy Birthday")
+    send_email(destination="sample+email+happy@gmail.com", msg=formatted_letter, subject="Happy Birthday")
 
