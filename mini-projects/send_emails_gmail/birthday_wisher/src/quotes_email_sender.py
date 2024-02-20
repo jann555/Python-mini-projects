@@ -1,0 +1,18 @@
+from datetime import datetime
+
+from send_emails_gmail.birthday_wisher.utils.email_sender import send_email
+from send_emails_gmail.birthday_wisher.utils.read_file import CustomFileReader
+
+QUOTES_FILE = '../resources/quotes.txt'
+TUESDAY = 1
+quotes_file = CustomFileReader(QUOTES_FILE)
+
+email_address = "fredalocampo@gmail.com"
+destination_email = "fredalocampo+smtplib@gmail.com"
+
+day_of_week = datetime.now().weekday()
+
+message = quotes_file.get_random_quote()
+
+if day_of_week == TUESDAY:
+    send_email(email_address, destination_email, message)
