@@ -12,7 +12,7 @@ destination_email = "fredalocampo+smtplib@gmail.com"
 
 day_of_week = datetime.now().weekday()
 
-message = quotes_file.get_random_quote()
+message = quotes_file.get_random_line()
 
 if day_of_week == TUESDAY:
-    send_email(email_address, destination_email, message)
+    send_email(email_addr=email_address, destination=destination_email, msg=message)
