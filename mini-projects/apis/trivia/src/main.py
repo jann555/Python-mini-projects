@@ -1,6 +1,6 @@
 from question_model import Question
-from data import question_data
 from quiz_brain import QuizBrain
+from utils.data import question_data
 
 
 def execute():
