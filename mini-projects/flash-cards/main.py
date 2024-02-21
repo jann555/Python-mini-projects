@@ -11,7 +11,7 @@ try:
     # LOAD DATA
     data_frame = pd.read_csv('./data/word_to_learn.csv')
 except FileNotFoundError:
-    data_frame = pd.read_csv('./data/french_words.csv')
+    data_frame = pd.read_csv('data/french_words.csv')
     learn_dictionary = data_frame.to_dict(orient="records")
 else:
     learn_dictionary = data_frame.to_dict(orient="records")
@@ -48,10 +48,10 @@ window.config(padx=50, pady=50, bg=BACKGROUND_COLOR, highlightthickness=0)
 # Delay 3 seconds
 flip_timer = window.after(3000, func=flip_card)
 # Images from file
-card_front = PhotoImage(file='./images/card_front.png')
-card_back = PhotoImage(file='./images/card_back.png')
-right = PhotoImage(file='./images/right.png')
-wrong = PhotoImage(file='./images/wrong.png')
+card_front = PhotoImage(file='images/card_front.png')
+card_back = PhotoImage(file='images/card_back.png')
+right = PhotoImage(file='images/right.png')
+wrong = PhotoImage(file='images/wrong.png')
 
 canvas = Canvas(width=800, height=526, background=BACKGROUND_COLOR, highlightbackground=BACKGROUND_COLOR)
 flash_card = canvas.create_image(400, 263, image=card_front)
