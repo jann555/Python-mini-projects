@@ -8,6 +8,8 @@ load_dotenv()
 account_sid = os.getenv('TWILIO_ACCOUNT_SID')
 auth_token = os.getenv('TWILIO_AUTH_TOKEN')
 API_KEY = os.getenv("API_KEY_OPEN_WEATHER")
+to_number = os.getenv("TWILIO_TO_NUMBER")
+from_number = os.getenv("TWILIO_FROM_NUMBER")
 ENDPOINT = "https://api.openweathermap.org/data/2.5/forecast"
 
 params = {
@@ -29,7 +31,7 @@ for hour_data in weather_data["list"]:
 if will_rain:
     message = client.messages \
         .create(body="It's going to rain today. Bring an umbrella ☔",
-                from_='+18559807433',
-                to='+17867128096'
+                from_=from_number,
+                to=to_number
                 )
     print(message.status)
