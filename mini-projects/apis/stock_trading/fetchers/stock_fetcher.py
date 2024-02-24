@@ -42,7 +42,6 @@ def get_stock_price(stock_name):
 
 
 def get_stock_news(company_name):
-    response = ''
     if company_name:
         params = {
             'q': company_name,
@@ -52,10 +51,12 @@ def get_stock_news(company_name):
         }
         response = requests.get(url=news_endpoint, params=params)
         response.raise_for_status()
-        response = response.json()['articles'][:3]
-        print(len(response))
-
-    return response
+        articles_top_3 = response.json()['articles'][:3]
+        formatted = [f'Headline: {article['title']} \nBrief: {article['description']} \nSource: {article['url']}'
+                     for article in articles_top_3]
+        return formatted
+    else:
+        return ''
 
 
 def get_today_date():
