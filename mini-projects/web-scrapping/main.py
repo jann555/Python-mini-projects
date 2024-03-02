@@ -1,26 +1,33 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 
-response = requests.get('https://news.ycombinator.com/news')
+URL = "https://web.archive.org/web/20200518073855/https://www.empireonline.com/movies/features/best-movies-2/"
 
-yc_webpage = response.text
+# Write your code below this line 👇
 
-soup = BeautifulSoup(yc_webpage, parser='lxml', features="lxml")
+response = requests.get(URL)
+website_html = response.text
 
-articles = soup.find_all('a')
-article_texts = []
-article_links = []
+soup = BeautifulSoup(website_html, parser='lxml', features="lxml")
 
-print(articles)
+all_movies = soup.find_all(name="h3", class_="title")
 
-for article_tag in articles:
-    text = article_tag.getText()
-    article_texts.append(text)
-    link = article_tag.get('href')
-    article_links.append(link)
+movie_titles = [movie.getText() for movie in all_movies]
+movies = movie_titles[::-1]
 
-article_up_votes = [int(score.getText().split(' ')[0]) for score in soup.find_all(name='span', class_='score')]
+with open("movies.txt", mode="w", encoding="utf-8") as file:
+    for movie in movies:
+        file.write(f"{movie}\n")
 
-print(article_texts)
-print(article_links)
-print(article_up_votes)
+
+'''
+FAQ: Empire's website has changed!
+
+When this lesson was created, I used this URL for the project: 
+URL = "https://www.empireonline.com/movies/features/best-movies-2/"
+
+However, Empire has since changed their website. You can see this when you inspect the movie title elements. 
+You'll see that the h3 with the class "title" is no longer there. 
+To use exactly the same code as per the solution, we can use a cached version of the website from the Internet Archive's Wayback Machine.
+
+'''
