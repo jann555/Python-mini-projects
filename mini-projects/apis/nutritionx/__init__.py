@@ -41,8 +41,7 @@ now_time = datetime.now().strftime("%X")
 
 # Sheety Project API. Check your Google sheet name and Sheety endpoint
 GOOGLE_SHEET_NAME = "workout"
-sheet_endpoint = os.environ[
-    "ENV_SHEETY_ENDPOINT"]
+sheet_endpoint = os.environ["ENV_SHEETY_ENDPOINT"]
 
 # Sheety API Call & Authentication
 for exercise in result["exercises"]:
