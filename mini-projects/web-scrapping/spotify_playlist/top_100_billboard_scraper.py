@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-from spotify_auth import add_songs_to_spotify_playlist
 
 
 def get_top_100_by_date(date):
